@@ -1,0 +1,64 @@
+import React, { useState } from 'react';
+import type { TaskCreateData } from '../types/types';
+
+interface TaskModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onAddTask: (taskData: TaskCreateData) => void;
+  isCreating: boolean;
+}
+
+export const TaskModal: React.FC<TaskModalProps> = ({ isOpen, onClose, onAddTask, isCreating }) => {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [priority, setPriority] = useState<'Alta' | 'Media' | 'Baixa' | 'Nenhuma'>('Media');
+  const [dueDate, setDueDate] = useState('');
+
+  if (!isOpen) return null;
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onAddTask({ title, description, priority, dueDate: dueDate || null });
+    setTitle(''); setDescription(''); setPriority('Media'); setDueDate('');
+    onClose();
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="bg-white/95 dark:bg-neutral-900 backdrop-blur-xl rounded-2xl shadow-2xl w-full max-w-md p-6 border border-white/20 dark:border-neutral-800" onClick={e => e.stopPropagation()}>
+        <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">Nova Tarefa</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1" htmlFor="task-title">Título</label>
+            <input id="task-title" type="text" value={title} onChange={e => setTitle(e.target.value)} className="w-full bg-gray-100 dark:bg-neutral-800 border-2 border-transparent dark:border-neutral-700 focus:border-blue-500 rounded-lg py-2 px-3 text-gray-700 dark:text-gray-100 focus:outline-none focus:ring-0 transition-colors placeholder-gray-400 dark:placeholder-gray-500" required placeholder="Digite o título da tarefa" disabled={isCreating}/>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1" htmlFor="task-description">Descrição</label>
+            <textarea id="task-description" value={description} onChange={e => setDescription(e.target.value)} rows={3} className="w-full bg-gray-100 dark:bg-neutral-800 border-2 border-transparent dark:border-neutral-700 focus:border-blue-500 rounded-lg py-2 px-3 text-gray-700 dark:text-gray-100 focus:outline-none focus:ring-0 transition-colors placeholder-gray-400 dark:placeholder-gray-500" placeholder="Digite a descrição da tarefa (opcional)" disabled={isCreating}></textarea>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1" htmlFor="task-priority">Prioridade</label>
+              <select id="task-priority" value={priority} onChange={e => setPriority(e.target.value as 'Alta' | 'Media' | 'Baixa' | 'Nenhuma')} className="w-full bg-gray-100 dark:bg-neutral-800 border-2 border-transparent dark:border-neutral-700 focus:border-blue-500 rounded-lg py-2 px-3 text-gray-700 dark:text-gray-100 focus:outline-none focus:ring-0 transition-colors" aria-label="Selecionar prioridade da tarefa" disabled={isCreating}>
+                <option value="Alta">Alta</option>
+                <option value="Media">Média</option>
+                <option value="Baixa">Baixa</option>
+                <option value="Nenhuma">Nenhuma</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1" htmlFor="task-due-date">Data de Entrega</label>
+              <input id="task-due-date" type="date" value={dueDate} onChange={e => setDueDate(e.target.value)} className="w-full bg-gray-100 dark:bg-neutral-800 border-2 border-transparent dark:border-neutral-700 focus:border-blue-500 rounded-lg py-2 px-3 text-gray-700 dark:text-gray-100 focus:outline-none focus:ring-0 transition-colors" aria-label="Selecionar data de entrega da tarefa" disabled={isCreating}/>
+            </div>
+          </div>
+          <div className="mt-6 flex justify-end gap-3">
+            <button type="button" onClick={onClose} className="bg-gray-200 dark:bg-neutral-700 text-gray-700 dark:text-gray-100 font-bold py-2 px-4 rounded-lg hover:bg-gray-300 dark:hover:bg-neutral-600" disabled={isCreating}>Cancelar</button>
+            <button type="submit" className="bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 disabled:opacity-50" disabled={isCreating}>
+              {isCreating ? 'A criar...' : 'Adicionar Tarefa'}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}; 
