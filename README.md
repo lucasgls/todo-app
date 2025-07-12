@@ -9,8 +9,6 @@
 
 ---
 
-Este é um projeto **full-stack** de uma aplicação de gestão de tarefas, desenhado para demonstrar uma arquitetura robusta e moderna. O foco principal do desenvolvimento foi a construção de uma **API REST segura e profissional com Java e o ecossistema Spring**, servida por um cliente visualmente limpo em React.
-
 ## 🚀 Apresentação Visual da Aplicação
 
 A aplicação oferece um fluxo de utilizador completo, desde o registo até à gestão de tarefas e funcionalidades de administração.
@@ -61,4 +59,4 @@ A API foi desenhada com uma arquitetura em camadas e segue as melhores práticas
 | :--- | :--- |
 | **Back-End** | Java 17+, Spring Boot, Spring Security, Spring Data JPA, JWT, Maven, Flyway |
 | **Base de Dados** | MySQL |
-| **Front-End** | React, TypeScript, Vite, Tailwind CSS |
+| **Front-End** | React, TypeScript, Vite, Tailwind CSS | 
