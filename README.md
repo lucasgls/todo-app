@@ -33,5 +33,3 @@ Aplicação full-stack de **gestão de tarefas** com:
 ## ✅ Destaques Técnicos
 - POO, Clean Code e Design Patterns
 - API RESTful 
-- Arquitetura modular e escalável 
-
