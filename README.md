@@ -29,7 +29,3 @@ Aplicação full-stack de **gestão de tarefas** com:
 | **Back-End** | Java 17+, Spring Boot, Spring Security, Spring Data JPA, JWT, Flyway |
 | **Base de Dados** | MySQL |
 | **Front-End** | React, TypeScript, Vite, Tailwind CSS |
-
-## ✅ Destaques Técnicos
-- POO, Clean Code e Design Patterns
-- API RESTful 
